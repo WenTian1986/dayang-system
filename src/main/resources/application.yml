@@ -1,0 +1,64 @@
+#端口号
+server:
+  port: 9999
+
+#数据库驱动
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_dayang_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: dy0036
+  jackson:
+    #JSON日期格式化
+    date-format:  yyyy-MM-dd
+    #JSON日期格式化设置时区为上海
+    time-zone: Asia/Shanghai
+  mvc:
+    #日期格式化
+    format:
+      date: yyyy-MM-dd
+      date-time: yyyy-MM-dd HH:mm:ss
+  #Redis相关配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 10000
+    #redis过期时间（自定义属性）
+    expire: 60000
+
+#mp配置
+mybatis-plus:
+  #加载映射文件
+  mapper-locations: classpath*:/mapper/**/*.xml
+  #设置别名
+  type-aliases-package: com.manong.entity
+  #关闭驼峰命名映射
+#  configuration:
+#    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      # 全局逻辑删除的实体字段名
+      logic-delete-field: isDelete
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+
+#显示日志
+logging:
+  level:
+    com.manong.dao: debug
+
+#jwt配置
+jwt:
+  #密钥
+  secret: com.manong
+  #过期时间（单位ms）
+  expiration: 3600000 #1小时
+
+#登录请求地址(自定义)
+request:
+  login:
+    url: /api/user/login
